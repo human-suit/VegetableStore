@@ -1,12 +1,9 @@
-import './App.scss'
+import './App.scss';
 
 function App() {
+  var r = 1;
 
-  return (
-    <>
-      Hello world!
-    </>
-  )
+  return <>Hello world!</>;
 }
 
-export default App
+export default App;
