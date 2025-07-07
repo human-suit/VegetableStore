@@ -1,0 +1,52 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0 auto;
+  height: 4em;
+  background-color: white;
+
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  .blockBasket > li {
+    display: flex;
+    border-bottom: 1px solid gray;
+    div {
+      font-weight: 600;
+      padding-top: 10px;
+      padding-bottom: 20px;
+      margin-left: 30px;
+      .flex {
+        display: flex;
+        margin-left: 0px;
+        div {
+          margin-top: -15px;
+          margin-left: 90px;
+        }
+      }
+      p {
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .blockBasket > li:last-child {
+    div {
+      padding-bottom: 30px;
+    }
+  }
+  .footer {
+    padding: 10px;
+    font-weight: 600;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+  }
+}

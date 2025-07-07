@@ -1,0 +1,13 @@
+@use '../../shared/styles/index.scss' as *;
+
+.main {
+  color: black;
+  background-color: #f3f5fa;
+  width: 100%;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+}
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}

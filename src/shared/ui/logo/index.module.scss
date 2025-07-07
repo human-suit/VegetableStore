@@ -1,0 +1,29 @@
+// @use '../../shared/styles/index.scss' as *;
+
+.logo {
+  position: relative;
+  background-color: #f7f7f7;
+  border-radius: 20px;
+  width: 200px;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  font-weight: bold;
+  font-size: 20px;
+  p {
+    margin-right: 10px;
+  }
+  .grenBack {
+    padding: 10px;
+    margin-top: -10px;
+    margin-left: 100px;
+    position: absolute;
+    background-color: #54b46a;
+    color: white;
+    text-align: center;
+    width: 100px;
+    text-transform: uppercase;
+    border-radius: 20px;
+  }
+}
