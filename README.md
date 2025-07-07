@@ -52,3 +52,4 @@ export default tseslint.config({
   },
 });
 ```
+# Practical-Task-2.3.2-Vegetable-Store-
