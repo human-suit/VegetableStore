@@ -20,24 +20,24 @@ type CartItem = {
 }
 
 function App() {
-  const [byeProd, setArr] = useState<CartItem[]>([])
+  const [orderItems, setOrderItems] = useState<CartItem[]>([])
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
 
   const addSum = (id: number, newItem: Product, kol: number) => {
-    const index = byeProd.findIndex((item) => item.id === id)
+    const index = orderItems.findIndex((item) => item.id === id)
 
     if (index !== -1) {
-      const updatedArr = byeProd.map((item) =>
+      const updatedArr = orderItems.map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + kol } : item
       )
-      setArr(updatedArr)
+      setOrderItems(updatedArr)
     } else {
       const updatedArr = [
-        ...byeProd,
+        ...orderItems,
         { id: id, product: newItem, quantity: kol },
       ]
-      setArr(updatedArr)
+      setOrderItems(updatedArr)
     }
   }
 
@@ -62,7 +62,11 @@ function App() {
 
   return (
     <div className={style.main}>
-      <Header count={byeProd.length} arrBye={byeProd} setArr={setArr} />
+      <Header
+        count={orderItems.length}
+        arrVegetables={orderItems}
+        setOrderItems={setOrderItems}
+      />
 
       <VegetableList
         label="Catalog"

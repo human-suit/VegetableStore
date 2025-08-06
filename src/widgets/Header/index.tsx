@@ -1,10 +1,9 @@
 import { Logo, Button, Pusher } from '../../shared/ui'
 import style from './index.module.scss'
 import { BasketSvg } from '../../shared/assets/'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Modal } from '../../shared/ui'
 import type { Product } from '../../app/App'
-// import shop from '../../shared/assets/'
 
 type CartItem = {
   id: number
@@ -14,36 +13,31 @@ type CartItem = {
 
 interface propsType {
   count: number
-  arrBye: CartItem[]
-  setArr: React.Dispatch<React.SetStateAction<CartItem[]>>
+  arrVegetables: CartItem[]
+  setOrderItems: React.Dispatch<React.SetStateAction<CartItem[]>>
 }
 
-export default function Header({ count, arrBye, setArr }: propsType) {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const [sum, setSum] = useState<number>(0)
+export default function Header({
+  count,
+  arrVegetables,
+  setOrderItems,
+}: propsType) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const increaseQuantity = (id: number, isMin: boolean) => {
-    let updatedArr
-    if (isMin) {
-      updatedArr = arrBye.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    } else {
-      updatedArr = arrBye.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + -1 } : item
-      )
-    }
+    const updatedArr = arrVegetables.map((item) =>
+      item.id === id
+        ? { ...item, quantity: item.quantity + (isMin ? 1 : -1) }
+        : item
+    )
 
-    setArr(updatedArr)
+    setOrderItems(updatedArr)
   }
 
-  useEffect(() => {
-    const total = arrBye.reduce(
-      (acc, item) => acc + item.product.price * item.quantity,
-      0
-    )
-    setSum(total)
-  }, [arrBye])
+  const totalSum = arrVegetables.reduce(
+    (acc, item) => acc + item.product.price * item.quantity,
+    0
+  )
 
   return (
     <div className={style.header}>
@@ -57,7 +51,7 @@ export default function Header({ count, arrBye, setArr }: propsType) {
       />
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ul className={style.blockBasket}>
-          {arrBye.map((item) => (
+          {arrVegetables.map((item) => (
             <li key={item.id}>
               <img src={item.product.image} alt={item.product.name} />
               <div>
@@ -79,7 +73,7 @@ export default function Header({ count, arrBye, setArr }: propsType) {
         </ul>
         <div className={style.footer}>
           <h2>Total</h2>
-          <p>$ {sum}</p>
+          <p>$ {totalSum}</p>
         </div>
       </Modal>
     </div>
