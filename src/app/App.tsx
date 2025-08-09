@@ -1,23 +1,9 @@
 import style from './styles/index.module.scss'
 import Header from '../widgets/Header'
-import VegetableList from '../widgets/VegetablesList'
 import { useEffect, useState } from 'react'
 import { Card, Loader } from '../shared/ui'
 
-export interface Product {
-  img: string | undefined
-  id: number
-  name: string
-  price: number
-  image: string
-  category: string
-}
-
-type CartItem = {
-  id: number
-  product: Product
-  quantity: number
-}
+import type { Product, CartItem } from '../shared/types'
 
 function App() {
   const [orderItems, setOrderItems] = useState<CartItem[]>([])
@@ -33,11 +19,7 @@ function App() {
       )
       setOrderItems(updatedArr)
     } else {
-      const updatedArr = [
-        ...orderItems,
-        { id: id, product: newItem, quantity: kol },
-      ]
-      setOrderItems(updatedArr)
+      setOrderItems([...orderItems, { id, product: newItem, quantity: kol }])
     }
   }
 
@@ -68,17 +50,26 @@ function App() {
         setOrderItems={setOrderItems}
       />
 
-      <VegetableList
-        label="Catalog"
-        children={
-          <div className={style.flex}>
-            {loading && <Loader />}
-            {products.map((product) => (
-              <Card product={product} key={product.id} setSum={addSum} />
-            ))}
-          </div>
-        }
-      />
+      <section className={style.section}>
+        <h2>Catalog</h2>
+        <div className={style.flex}>
+          {loading && <Loader />}
+          {!loading &&
+            products.map((product) => {
+              const cartItem = orderItems.find((item) => item.id === product.id)
+              const quantity = cartItem ? cartItem.quantity : 1
+
+              return (
+                <Card
+                  key={product.id}
+                  product={product}
+                  quantity={quantity}
+                  setSum={addSum}
+                />
+              )
+            })}
+        </div>
+      </section>
     </div>
   )
 }

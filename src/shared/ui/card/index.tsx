@@ -1,18 +1,23 @@
 import style from './index.module.scss'
-import type { Product } from '../../../app/App'
+import type { Product } from '../../types/'
 import { Button, Pusher } from '../'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 type Props = {
   product: Product
+  quantity: number
   setSum: (id: number, newItem: Product, count: number) => void
 }
 
-export default function Card({ product, setSum }: Props) {
-  const [count, setCount] = useState(1)
+export default function Card({ product, quantity, setSum }: Props) {
+  const [count, setCount] = useState(quantity)
+
+  useEffect(() => {
+    setCount(quantity)
+  }, [quantity])
 
   return (
-    <div className={style.main} key={product.id}>
+    <div className={style.main}>
       <img src={product.image} alt={product.name} />
       <div className={style.row}>
         <h3>{product.name}</h3>
@@ -25,11 +30,9 @@ export default function Card({ product, setSum }: Props) {
       <div className={style.row}>
         <p>$ {product.price}</p>
         <Button
-          label="Add to card"
+          label="Add to cart"
           className={`butGreen`}
-          onClick={() => {
-            setSum(product.id, product, count)
-          }}
+          onClick={() => setSum(product.id, product, count)}
         />
       </div>
     </div>

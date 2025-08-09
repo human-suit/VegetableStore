@@ -3,19 +3,7 @@ import style from './index.module.scss'
 import { BasketSvg } from '../../shared/assets/'
 import { useState } from 'react'
 import { Modal } from '../../shared/ui'
-import type { Product } from '../../app/App'
-
-type CartItem = {
-  id: number
-  product: Product
-  quantity: number
-}
-
-interface propsType {
-  count: number
-  arrVegetables: CartItem[]
-  setOrderItems: React.Dispatch<React.SetStateAction<CartItem[]>>
-}
+import type { propsType } from '../../shared/types/'
 
 export default function Header({
   count,
@@ -24,14 +12,19 @@ export default function Header({
 }: propsType) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const increaseQuantity = (id: number, isMin: boolean) => {
-    const updatedArr = arrVegetables.map((item) =>
-      item.id === id
-        ? { ...item, quantity: item.quantity + (isMin ? 1 : -1) }
-        : item
+  const increaseQuantity = (id: number, increment: boolean) => {
+    setOrderItems((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantity: increment
+                ? item.quantity + 1
+                : Math.max(1, item.quantity - 1),
+            }
+          : item
+      )
     )
-
-    setOrderItems(updatedArr)
   }
 
   const totalSum = arrVegetables.reduce(
