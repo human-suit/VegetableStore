@@ -1,5 +1,12 @@
 https://human-suit.github.io/VegetableStore
 
+
+https://github.com/user-attachments/assets/7c4d7c6a-795e-44f2-91ba-76c185763f61
+
+
+https://github.com/user-attachments/assets/da3d7397-5179-4d23-9c78-b3b69b677bed
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
