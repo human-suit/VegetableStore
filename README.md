@@ -1,5 +1,6 @@
 https://human-suit.github.io/VegetableStore
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1f148687-41f6-4d23-a08a-9445b789e231" />
 
 https://github.com/user-attachments/assets/7c4d7c6a-795e-44f2-91ba-76c185763f61
 
